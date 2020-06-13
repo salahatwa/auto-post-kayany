@@ -202,6 +202,7 @@ public class ArticleTemplateService {
 
 		// Use Madrid's time zone to format the date in
 		df.setTimeZone(TimeZone.getTimeZone("Asia/Riyadh"));
+		tf.setTimeZone(TimeZone.getTimeZone("Asia/Riyadh"));
 
 //		cal.add(Calendar.DATE, 1);
 //		date = cal.getTime();
@@ -233,7 +234,7 @@ public class ArticleTemplateService {
 					"https://auto-y.herokuapp.com/internal/112650030474835/new?timezone=-180", request, String.class);
 			System.out.println("Done schedule:" + responseEntityStr);
 
-			Thread.sleep(10000);
+			Thread.sleep(60000);
 		} catch (Exception ex) {
 		}
 
