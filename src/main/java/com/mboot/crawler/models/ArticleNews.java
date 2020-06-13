@@ -14,7 +14,7 @@ public class ArticleNews {
 
 	@Data
 	public class Source {
-		private int id;
+//		private int id;
 		private String name;
 	}
 
