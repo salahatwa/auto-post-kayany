@@ -9,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
+import com.mboot.crawler.repository.ArticleRepository;
 import com.mboot.crawler.service.ArticleTemplateService;
 
 import java.util.HashMap;
@@ -22,6 +23,9 @@ public class Application implements ApplicationRunner {
 
     @Autowired
     private ArticleTemplateService emailService;
+    
+    @Autowired
+    private ArticleRepository articleRepo;
 
     public static void main(String[] args) throws Exception {
         SpringApplication.run(Application.class, args);
@@ -29,6 +33,8 @@ public class Application implements ApplicationRunner {
 
     @Override
     public void run(ApplicationArguments applicationArguments) throws Exception {
+    	
+    	articleRepo.deleteAll();
 //        log.info("Sending Email with Freemarker HTML Template Example");
 //
 //        Mail mail = new Mail();
