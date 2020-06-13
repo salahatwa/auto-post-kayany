@@ -1,0 +1,15 @@
+C:\Data\workspace\workspace-backend\auto-post-crawler\src\main\java\com\mboot\crawler\service\PDFParserService.java
+C:\Data\workspace\workspace-backend\auto-post-crawler\src\main\java\com\mboot\crawler\service\ArticleTemplateService.java
+C:\Data\workspace\workspace-backend\auto-post-crawler\src\main\java\com\mboot\crawler\Application.java
+C:\Data\workspace\workspace-backend\auto-post-crawler\src\main\java\com\mboot\crawler\models\ApiArticlesResponse.java
+C:\Data\workspace\workspace-backend\auto-post-crawler\src\main\java\com\mboot\crawler\models\ImgurRes.java
+C:\Data\workspace\workspace-backend\auto-post-crawler\src\main\java\com\mboot\crawler\entity\Article.java
+C:\Data\workspace\workspace-backend\auto-post-crawler\src\main\java\com\mboot\crawler\config\SchedulerConfig.java
+C:\Data\workspace\workspace-backend\auto-post-crawler\src\main\java\com\mboot\crawler\schedul\ScheduledTasks.java
+C:\Data\workspace\workspace-backend\auto-post-crawler\src\main\java\com\mboot\crawler\config\FreemarkerConfig.java
+C:\Data\workspace\workspace-backend\auto-post-crawler\src\main\java\com\mboot\crawler\models\ApiResponse.java
+C:\Data\workspace\workspace-backend\auto-post-crawler\src\main\java\com\mboot\crawler\config\MbootConfiguration.java
+C:\Data\workspace\workspace-backend\auto-post-crawler\src\main\java\com\mboot\crawler\repository\ArticleRepository.java
+C:\Data\workspace\workspace-backend\auto-post-crawler\src\main\java\com\mboot\crawler\models\ArticleNews.java
+C:\Data\workspace\workspace-backend\auto-post-crawler\src\main\java\com\mboot\crawler\PostDto.java
+C:\Data\workspace\workspace-backend\auto-post-crawler\src\main\java\com\mboot\crawler\Mail.java

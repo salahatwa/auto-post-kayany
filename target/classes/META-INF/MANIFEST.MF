@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Implementation-Title: Auto Crawler - auto-post-crawler
+Implementation-Version: 1.0.0-SNAPSHOT
+Built-By: alinma
+Implementation-Vendor-Id: com.mboot.crawler
+Build-Jdk: 1.8.0_241
+Implementation-URL: http://projects.spring.io/spring-boot/auto-post-cr
+ awler/
+Created-By: Maven Integration for Eclipse
+Implementation-Vendor: Pivotal Software, Inc.
+
