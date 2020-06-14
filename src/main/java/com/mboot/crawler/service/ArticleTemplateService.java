@@ -149,6 +149,7 @@ public class ArticleTemplateService {
 			e.printStackTrace();
 		} finally {
 			baos.close();
+			System.gc();
 		}
 		return html;
 
@@ -235,6 +236,7 @@ public class ArticleTemplateService {
 			System.out.println("Done schedule:" + responseEntityStr);
 
 			Thread.sleep(60000);
+			System.gc();
 		} catch (Exception ex) {
 		}
 

@@ -34,7 +34,7 @@ public class Application implements ApplicationRunner {
     @Override
     public void run(ApplicationArguments applicationArguments) throws Exception {
     	
-    	articleRepo.deleteAll();
+//    	articleRepo.deleteAll();
 //        log.info("Sending Email with Freemarker HTML Template Example");
 //
 //        Mail mail = new Mail();

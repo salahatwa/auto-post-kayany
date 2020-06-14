@@ -55,6 +55,8 @@ public class ScheduledTasks {
 					String imgURL = articleTemplateService.buildTemplateImage(article);
 
 					articleTemplateService.schedule(article, imgURL);
+					
+					Thread.sleep(60000);
 				} catch (Exception e) {
 
 				}
@@ -65,6 +67,7 @@ public class ScheduledTasks {
 		logger.info("Schedule Task Finished");
 
 		System.out.println(responseEntityStr.getBody());
+		System.gc();
 
 	}
 
