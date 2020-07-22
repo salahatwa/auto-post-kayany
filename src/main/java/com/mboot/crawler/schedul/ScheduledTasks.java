@@ -20,7 +20,7 @@ import com.mboot.crawler.repository.ArticleRepository;
 import com.mboot.crawler.service.ArticleTemplateService;
 
 /**
- * Created by rajeevkumarsingh on 02/08/17.
+ * Created by ssatwa on 22-07-2020.
  */
 @Component
 public class ScheduledTasks {
@@ -54,7 +54,8 @@ public class ScheduledTasks {
 					article.setId(art.getId());
 					String imgURL = articleTemplateService.buildTemplateImage(article);
 
-					articleTemplateService.schedule(article, imgURL);
+//					articleTemplateService.schedule(article, imgURL);
+					articleTemplateService.createKayanyPost(article, imgURL);
 					
 					Thread.sleep(60000);
 				} catch (Exception e) {

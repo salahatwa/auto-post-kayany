@@ -47,6 +47,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mboot.crawler.PostDto;
 import com.mboot.crawler.models.ArticleNews;
 import com.mboot.crawler.models.ImgurRes;
+import com.mboot.crawler.models.Post;
 import com.openhtmltopdf.bidi.support.ICUBidiReorderer;
 import com.openhtmltopdf.bidi.support.ICUBidiSplitter;
 import com.openhtmltopdf.outputdevice.helper.BaseRendererBuilder.TextDirection;
@@ -189,6 +190,31 @@ public class ArticleTemplateService {
 
 	@Autowired
 	private RestTemplate restTemplate;
+
+	public void createKayanyPost(ArticleNews articleNews,String url) {
+		Post post = new Post();
+		post.setAuthorId(1);
+		post.setChannelId(4);
+		post.setCreated(new Date());
+		post.setTitle(articleNews.getTitle());
+		post.setContent(articleNews.getDescription());
+		post.setSummary(articleNews.getDescription());
+
+		try {
+			HttpHeaders headers = new HttpHeaders();
+			headers.setContentType(MediaType.APPLICATION_JSON);
+
+			HttpEntity<String> request = new HttpEntity<String>(mapper.writeValueAsString(post), headers);
+			ResponseEntity<String> responseEntityStr = restTemplate
+					.postForEntity("https://kayany.herokuapp.com/post/create", request, String.class);
+			System.out.println("Done Post:" + responseEntityStr);
+
+			Thread.sleep(60000);
+			System.gc();
+		} catch (Exception ex) {
+		}
+
+	}
 
 	public void schedule(ArticleNews articleNews, String url) throws java.lang.Exception {
 
