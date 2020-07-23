@@ -58,6 +58,9 @@ import com.openhtmltopdf.pdfboxout.PdfRendererBuilder;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.extern.log4j.Log4j;
 
 @Service
@@ -117,6 +120,21 @@ public class ArticleTemplateService {
 		return tempFile;
 	}
 
+	public String buildTemplateHtml(ArticleNews article) throws MessagingException, IOException, TemplateException {
+
+		Map<String, Object> model = mapper.convertValue(article, new TypeReference<Map<String, Object>>() {
+		});
+
+		Template t = freemarkerConfiguration.getTemplate("post-template-4.ftl");
+		String html = FreeMarkerTemplateUtils.processTemplateIntoString(t, model);
+
+//		TagNode rootTagNode = cleaner.clean(html);
+//
+//		html = xmlSerializer.getAsString(rootTagNode, "ISO-8859-1");
+
+		return html;
+	}
+
 	public String buildTemplateImage(ArticleNews article) throws MessagingException, IOException, TemplateException {
 
 //		article.setUrlToImage(imageToBase64(article.getUrlToImage()));
@@ -124,7 +142,7 @@ public class ArticleTemplateService {
 		Map<String, Object> model = mapper.convertValue(article, new TypeReference<Map<String, Object>>() {
 		});
 
-		Template t = freemarkerConfiguration.getTemplate("post-template-2.ftl");
+		Template t = freemarkerConfiguration.getTemplate("post-template-5.ftl");
 		String html = FreeMarkerTemplateUtils.processTemplateIntoString(t, model);
 
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -142,7 +160,9 @@ public class ArticleTemplateService {
 
 			doc.close();
 
-			return getImageLink(baos.toByteArray());
+			String link = getImageLink(baos.toByteArray());
+			System.err.println(link);
+			return link;
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -191,29 +211,54 @@ public class ArticleTemplateService {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	public void createKayanyPost(ArticleNews articleNews,String url) {
+	public void createKayanyPost(ArticleNews articleNews, String url) {
 		Post post = new Post();
 		post.setAuthorId(1);
 		post.setChannelId(4);
 		post.setCreated(new Date());
-		post.setTitle(articleNews.getTitle());
-		post.setContent(articleNews.getDescription());
-		post.setSummary(articleNews.getDescription());
+
+		if (articleNews.getTitle().length() > 64)
+			post.setTitle(articleNews.getTitle().substring(0, 60) + "..");
+		else
+			post.setTitle(articleNews.getTitle());
+
+		if (articleNews.getDescription().length() > 140)
+			post.setSummary(articleNews.getDescription().substring(0, 135) + "..");
+		else
+			post.setSummary(articleNews.getDescription());
 
 		try {
+			post.setContent(buildTemplateHtml(articleNews));
+		} catch (MessagingException | IOException | TemplateException e) {
+			e.printStackTrace();
+		}
+
+		post.setTags("أخبار");
+		post.setEditor("tinymce");
+		try {
+			System.err.println(mapper.writeValueAsString(post));
 			HttpHeaders headers = new HttpHeaders();
 			headers.setContentType(MediaType.APPLICATION_JSON);
 
 			HttpEntity<String> request = new HttpEntity<String>(mapper.writeValueAsString(post), headers);
-			ResponseEntity<String> responseEntityStr = restTemplate
-					.postForEntity("https://kayany.herokuapp.com/post/create", request, String.class);
-			System.out.println("Done Post:" + responseEntityStr);
+			ResponseEntity<PostResult> responseEntityStr = restTemplate
+					.postForEntity("https://kayany.herokuapp.com/post/create", request, PostResult.class);
+			System.out.println("Done Post:[" + responseEntityStr.getStatusCodeValue() + "]:"
+					+ "https://kayany.herokuapp.com/post/" + responseEntityStr.getBody().getPostId());
 
 			Thread.sleep(60000);
 			System.gc();
 		} catch (Exception ex) {
+			ex.printStackTrace();
 		}
 
+	}
+
+	@Data
+	@NoArgsConstructor
+	@AllArgsConstructor
+	public static class PostResult {
+		private long postId;
 	}
 
 	public void schedule(ArticleNews articleNews, String url) throws java.lang.Exception {

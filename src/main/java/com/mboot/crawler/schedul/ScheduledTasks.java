@@ -52,10 +52,10 @@ public class ScheduledTasks {
 
 				try {
 					article.setId(art.getId());
-					String imgURL = articleTemplateService.buildTemplateImage(article);
+//					String imgURL = articleTemplateService.buildTemplateImage(article);
 
 //					articleTemplateService.schedule(article, imgURL);
-					articleTemplateService.createKayanyPost(article, imgURL);
+					articleTemplateService.createKayanyPost(article, "");
 					
 					Thread.sleep(60000);
 				} catch (Exception e) {
