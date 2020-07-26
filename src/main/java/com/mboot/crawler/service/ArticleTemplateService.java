@@ -244,7 +244,7 @@ public class ArticleTemplateService {
 			ResponseEntity<PostResult> responseEntityStr = restTemplate
 					.postForEntity("https://kayany.herokuapp.com/post/create", request, PostResult.class);
 			System.out.println("Done Post:[" + responseEntityStr.getStatusCodeValue() + "]:"
-					+ "https://kayany.herokuapp.com/post/" + responseEntityStr.getBody().getPostId());
+					+ "https://kayany.herokuapp.com/post/" + responseEntityStr.getBody().getSlug());
 
 			Thread.sleep(60000);
 			System.gc();
@@ -258,7 +258,7 @@ public class ArticleTemplateService {
 	@NoArgsConstructor
 	@AllArgsConstructor
 	public static class PostResult {
-		private long postId;
+		private String slug;
 	}
 
 	public void schedule(ArticleNews articleNews, String url) throws java.lang.Exception {

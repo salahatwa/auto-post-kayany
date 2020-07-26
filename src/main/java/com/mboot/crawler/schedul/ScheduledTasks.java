@@ -40,6 +40,9 @@ public class ScheduledTasks {
 	@Scheduled(cron = "0 0/15 * * * ?")
 	public void scheduleTaskWithCronExpression() {
 		logger.info("Started Cron Task :: Execution Time - {}", dateTimeFormatter.format(LocalDateTime.now()));
+		//123053683b534ecbabd274ab5a980452
+		//ae
+		//http://newsapi.org/v2/top-headlines?country=ae&apiKey=123053683b534ecbabd274ab5a980452
 		ResponseEntity<ApiArticlesResponse> responseEntityStr = restTemplate.getForEntity(
 				"https://newsapi.org/v2/top-headlines?country=eg&apiKey=52945e5308824c24ad14ab8d43e072b1",
 				ApiArticlesResponse.class);
